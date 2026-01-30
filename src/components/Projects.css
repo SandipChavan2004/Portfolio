@@ -1,0 +1,638 @@
+/* ==================== PROJECTS SECTION ==================== */
+.projects {
+    background: #000;
+    padding: var(--spacing-3xl) 0;
+    position: relative;
+    z-index: 1;
+    isolation: isolate;
+    overflow: hidden;
+}
+
+.projects-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    overflow: hidden;
+    background-color: #000;
+}
+
+.projects-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7));
+    z-index: -2;
+}
+
+.stars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image:
+        radial-gradient(2px 2px at 20% 30%, white, transparent),
+        radial-gradient(2px 2px at 60% 70%, white, transparent),
+        radial-gradient(1px 1px at 50% 50%, white, transparent),
+        radial-gradient(1px 1px at 80% 10%, white, transparent),
+        radial-gradient(2px 2px at 90% 60%, white, transparent),
+        radial-gradient(1px 1px at 33% 80%, white, transparent),
+        radial-gradient(1px 1px at 15% 90%, white, transparent);
+    background-size: 200% 200%;
+    animation: twinkle 8s ease-in-out infinite;
+    opacity: 0.6;
+}
+
+.projects-container {
+    position: relative;
+    padding: 0;
+}
+
+
+/* ==================== CARD WRAPPER (GSAP CONTROLLED) ==================== */
+.project-card-wrapper {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    position: relative;
+}
+
+/* Z-index stacking for proper "card over card" layering */
+.project-card-wrapper:nth-child(1) {
+    z-index: 1;
+}
+
+.project-card-wrapper:nth-child(2) {
+    z-index: 2;
+}
+
+.project-card-wrapper:nth-child(3) {
+    z-index: 3;
+}
+
+.project-card-wrapper:nth-child(4) {
+    z-index: 4;
+}
+
+.project-card-wrapper:nth-child(5) {
+    z-index: 5;
+}
+
+.project-card-wrapper:nth-child(6) {
+    z-index: 6;
+}
+
+
+/* ==================== PROJECT CARD (MODERN STYLE) ==================== */
+.project-card {
+    width: 100%;
+    max-width: 1000px;
+    height: 70vh;
+    min-height: 500px;
+    padding: 0;
+    margin: 0 var(--spacing-lg);
+    transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transform-origin: top center;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    border-radius: 32px;
+    background: rgb(14, 14, 14);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow:
+        0 20px 60px -10px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(255, 255, 255, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    will-change: transform;
+}
+
+@media (max-height: 600px) {
+    .project-card {
+        height: 85vh;
+        min-height: auto;
+    }
+
+    .project-card-wrapper {
+        height: 120vh;
+        /* Allow more scroll room for pinning on short screens */
+    }
+}
+
+/* Animated gradient border effect */
+.project-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 32px;
+    padding: 2px;
+    background: linear-gradient(135deg,
+            #ffffff,
+            #a1a1aa,
+            #ffffff,
+            #71717a);
+    background-size: 200% 200%;
+    animation: gradientRotate 4s ease infinite;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+@keyframes gradientRotate {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+
+
+/* Project number indicator */
+.project-card::after {
+    content: attr(data-number);
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-size: 6rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    z-index: 1;
+    pointer-events: none;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
+}
+
+.project-card-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    padding: 3rem;
+    position: relative;
+    z-index: 2;
+}
+
+/* ==================== IMAGE SECTION (LEFT SIDE) ==================== */
+.project-header {
+    position: relative;
+    flex: 0 0 45%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0) 70%);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    transition: all 0.5s ease;
+}
+
+.project-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 30px 30px;
+    -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+    opacity: 0.5;
+    z-index: 1;
+}
+
+.project-gradient {
+    position: absolute;
+    inset: -50%;
+    opacity: 0.25;
+    filter: blur(80px);
+    z-index: 0;
+    transition: all 0.5s ease;
+    animation: gradientPulse 8s ease-in-out infinite;
+}
+
+@keyframes gradientPulse {
+
+    0%,
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 0.15;
+    }
+
+    50% {
+        transform: scale(1.2) rotate(180deg);
+        opacity: 0.25;
+    }
+}
+
+.project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: relative;
+    z-index: 2;
+    border-radius: 20px;
+    opacity: 1;
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    filter: grayscale(0%) brightness(1.05);
+}
+
+/* ==================== CONTENT (RIGHT SIDE) ==================== */
+.project-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.project-title {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    background: linear-gradient(135deg, #fff 0%, #e0e0e0 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.3s ease;
+}
+
+.project-description {
+    color: #a1a1aa;
+    line-height: 1.7;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+
+/* ==================== TECH STACK (BULLET POINTS) ==================== */
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    list-style: none;
+    padding: 0;
+}
+
+.tech-item {
+    color: #a1a1aa;
+    font-size: 0.95rem;
+    font-weight: 500;
+    position: relative;
+    padding-left: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.tech-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: linear-gradient(to right, #ffffff, #aaa);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.tech-item:hover {
+    color: #ffffff;
+}
+
+
+
+/* ==================== ACTION LINK ==================== */
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    background: linear-gradient(to right, #ffffff, #a1a1aa);
+    color: #000000;
+    padding: 0.75rem 2rem;
+    border-radius: 100px;
+    font-weight: 800;
+    font-size: 0.85rem;
+    margin-top: 1rem;
+    width: fit-content;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border: none;
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.08);
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.project-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, #ffffff, #e5e5e5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.project-link:hover {
+    gap: 1.2rem;
+    box-shadow: 0 15px 40px rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+}
+
+
+/* ==================== CARD STATES ==================== */
+.project-card {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+
+.project-image {
+    opacity: 1;
+    filter: grayscale(0%) brightness(1);
+}
+
+.project-gradient {
+    opacity: 0.25;
+}
+
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 1024px) {
+    .project-card {
+        max-width: 95%;
+        height: 75vh;
+        min-height: 550px;
+    }
+
+    .project-card-inner {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 2rem;
+    }
+
+    .project-header {
+        flex: 0 0 250px;
+        width: 100%;
+    }
+
+    .project-title {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .project-card {
+        max-width: 95%;
+        height: 80vh;
+        min-height: 500px;
+        margin: 0 var(--spacing-md);
+        background: rgba(20, 20, 22, 0.9);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .project-card-inner {
+        padding: 1.5rem;
+        gap: 1.5rem;
+    }
+
+    .project-header {
+        flex: 0 0 200px;
+        background: radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
+    }
+
+    .project-image {
+        opacity: 1;
+        filter: grayscale(0%) brightness(1.1);
+    }
+
+    .project-gradient {
+        opacity: 0.35;
+    }
+
+    .project-title {
+        font-size: 2rem;
+    }
+
+    .project-description {
+        font-size: 1rem;
+        color: #b4b4b4;
+    }
+
+    .project-card::after {
+        font-size: 4rem;
+        top: 1.5rem;
+        right: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .projects-header {
+        padding: var(--spacing-2xl) var(--spacing-sm);
+    }
+
+    .project-card {
+        max-width: 95%;
+        height: 85vh;
+        min-height: 450px;
+        margin: 0 var(--spacing-sm);
+        border-radius: 24px;
+    }
+
+    .project-card-inner {
+        padding: 1.25rem;
+        gap: 1.25rem;
+    }
+
+    .project-header {
+        flex: 0 0 180px;
+    }
+
+    .project-title {
+        font-size: 1.75rem;
+    }
+
+    .project-description {
+        font-size: 0.95rem;
+    }
+
+    .project-tech {
+        gap: 0.5rem;
+    }
+
+    .tech-tag {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    .project-link {
+        padding: 0.9rem 2rem;
+        font-size: 0.95rem;
+    }
+
+    .project-card::after {
+        font-size: 3rem;
+        top: 1rem;
+        right: 1rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .project-card {
+        height: 87vh;
+        min-height: 400px;
+        margin: 0 0.5rem;
+        border-radius: 20px;
+        background: rgba(25, 25, 27, 0.95);
+    }
+
+    .project-card-inner {
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .project-header {
+        flex: 0 0 160px;
+        border-radius: 16px;
+    }
+
+    .project-title {
+        font-size: 1.5rem;
+        line-height: 1.1;
+    }
+
+    .project-description {
+        font-size: 0.875rem;
+        line-height: 1.5;
+    }
+
+    .project-tech {
+        gap: 0.4rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .tech-item {
+        font-size: 0.875rem;
+        padding-left: 1rem;
+    }
+
+    .tech-item::before {
+        width: 5px;
+        height: 5px;
+    }
+
+    .project-link {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.875rem;
+        margin-top: 0.5rem;
+    }
+
+    .project-card::after {
+        font-size: 2.5rem;
+        top: 0.875rem;
+        right: 0.875rem;
+    }
+}
+
+@media (max-width: 320px) {
+    .project-card {
+        height: 90vh;
+        min-height: 380px;
+        border-radius: 18px;
+    }
+
+    .project-card-inner {
+        padding: 0.875rem;
+        gap: 0.875rem;
+    }
+
+    .project-header {
+        flex: 0 0 140px;
+    }
+
+    .project-title {
+        font-size: 1.35rem;
+    }
+
+    .project-description {
+        font-size: 0.8rem;
+    }
+
+    .tech-item {
+        font-size: 0.8rem;
+    }
+
+    .project-link {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.8rem;
+        letter-spacing: 0.5px;
+    }
+
+    .project-card::after {
+        font-size: 2rem;
+        top: 0.75rem;
+        right: 0.75rem;
+    }
+}
+
+/* Mobile-specific enhancements for touch devices */
+@media (max-width: 768px) {
+
+    /* Ensure cards are always bright on mobile (no hover state dimming) */
+    .project-card {
+        border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .project-image {
+        opacity: 1 !important;
+        filter: grayscale(0%) brightness(1.1) !important;
+    }
+
+    .project-gradient {
+        opacity: 0.35 !important;
+    }
+
+    .project-header {
+        border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .project-card::before {
+        opacity: 0.4;
+    }
+
+    /* Better text contrast on mobile */
+    .project-title {
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    }
+
+    .project-description {
+        color: #c4c4c4;
+    }
+
+    .tech-item {
+        color: #b4b4b4;
+    }
+
+    .tech-item:hover {
+        color: #ffffff;
+    }
+}

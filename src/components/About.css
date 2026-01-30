@@ -1,0 +1,178 @@
+/* ==================== ABOUT SECTION ==================== */
+.about {
+    position: relative;
+    overflow: hidden;
+    padding: var(--spacing-2xl) 0;
+}
+
+
+
+/* ==================== ABOUT CONTENT ==================== */
+.about-content {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: var(--spacing-3xl);
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.about.visible .about-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==================== PHOTO WITH DIAGONAL STRIPE SHAPE ==================== */
+.about-photo-wrapper {
+    position: relative;
+}
+
+.photo-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    transition: all var(--transition-base);
+}
+
+.photo-container:hover {
+    transform: translateY(-5px) scale(1.02);
+}
+
+.profile-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all var(--transition-base);
+    clip-path: polygon(0% 15%,
+            15% 0%,
+            85% 0%,
+            100% 15%,
+            100% 30%,
+            85% 30%,
+            85% 45%,
+            100% 45%,
+            100% 60%,
+            85% 60%,
+            85% 75%,
+            100% 75%,
+            100% 85%,
+            85% 100%,
+            15% 100%,
+            0% 85%,
+            0% 75%,
+            15% 75%,
+            15% 60%,
+            0% 60%,
+            0% 45%,
+            15% 45%,
+            15% 30%,
+            0% 30%);
+    box-shadow: 0 10px 40px rgba(74, 158, 255, 0.3);
+}
+
+.photo-container:hover .profile-photo {
+    filter: brightness(1.1);
+    box-shadow: 0 15px 50px rgba(74, 158, 255, 0.4);
+}
+
+/* ==================== TEXT ==================== */
+.about-text {
+    padding: var(--spacing-lg);
+}
+
+.about-heading {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-primary);
+}
+
+.about-text p {
+    font-size: var(--font-size-md);
+    line-height: 1.8;
+    color: var(--color-secondary);
+    margin-bottom: var(--spacing-md);
+}
+
+.about-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 768px) {
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+        text-align: center;
+    }
+
+    .about-photo-wrapper {
+        display: flex;
+        justify-content: center;
+    }
+
+    .photo-container {
+        width: 300px;
+        height: 300px;
+    }
+
+    .about-text {
+        padding: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-title {
+        font-size: var(--font-size-2xl);
+    }
+
+    .photo-container {
+        width: 240px;
+        height: 240px;
+    }
+
+    .about-heading {
+        font-size: var(--font-size-lg);
+    }
+
+    .about-text p {
+        font-size: var(--font-size-sm);
+    }
+}
+
+@media (max-width: 375px) {
+    .about {
+        padding: var(--spacing-xl) 0;
+    }
+
+    .photo-container {
+        width: 220px;
+        height: 220px;
+    }
+
+    .about-heading {
+        font-size: 1.15rem;
+    }
+
+    .about-text p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+}
+
+@media (max-width: 320px) {
+    .photo-container {
+        width: 200px;
+        height: 200px;
+    }
+
+    .about-heading {
+        font-size: 1.05rem;
+    }
+
+    .about-text p {
+        font-size: 0.85rem;
+    }
+}
