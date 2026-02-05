@@ -103,13 +103,14 @@
     cursor: pointer;
     border-radius: 32px;
     background: rgb(14, 14, 14);
-    backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow:
         0 20px 60px -10px rgba(0, 0, 0, 0.6),
         0 0 0 1px rgba(255, 255, 255, 0.05),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    will-change: transform;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    transform: translateZ(0);
 }
 
 @media (max-height: 600px) {
@@ -124,7 +125,8 @@
     }
 }
 
-/* Animated gradient border effect */
+/* Animated gradient border effect - DISABLED FOR PERFORMANCE */
+/* 
 .project-card::before {
     content: '';
     position: absolute;
@@ -145,6 +147,7 @@
     opacity: 0.3;
     z-index: -1;
 }
+*/
 
 @keyframes gradientRotate {
 
@@ -220,26 +223,14 @@
 .project-gradient {
     position: absolute;
     inset: -50%;
-    opacity: 0.25;
-    filter: blur(80px);
+    opacity: 0.15;
+    filter: blur(60px);
     z-index: 0;
-    transition: all 0.5s ease;
-    animation: gradientPulse 8s ease-in-out infinite;
+    transition: opacity 0.5s ease;
+    will-change: opacity;
 }
 
-@keyframes gradientPulse {
 
-    0%,
-    100% {
-        transform: scale(1) rotate(0deg);
-        opacity: 0.15;
-    }
-
-    50% {
-        transform: scale(1.2) rotate(180deg);
-        opacity: 0.25;
-    }
-}
 
 .project-image {
     width: 100%;

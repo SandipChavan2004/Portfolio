@@ -13,13 +13,18 @@ const Skills = () => {
             const duration = 25 + (index * 5);
 
             // For tripled items, one loop is 33.333%
-            gsap.set(el, { xPercent: isLeft ? 0 : -33.333 });
+            gsap.set(el, {
+                xPercent: isLeft ? 0 : -33.333,
+                force3D: true
+            });
 
             gsap.to(el, {
                 xPercent: isLeft ? -33.333 : 0,
                 duration: duration,
                 ease: "none",
                 repeat: -1,
+                force3D: true,
+                immediateRender: false
             });
         });
 

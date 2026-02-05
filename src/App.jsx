@@ -6,9 +6,12 @@ import Skills from './components/Skills';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
+import { useLenis } from './hooks/useLenis';
 import './App.css';
 
 function App() {
+    useLenis();
+
     return (
         <div className="app">
             <CustomCursor />

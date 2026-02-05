@@ -54,7 +54,8 @@ const Projects = () => {
                 pin: true,
                 pinSpacing: isLast, // ONLY the last card gets spacing to push following sections
                 id: `project-pin-${index}`,
-                scrub: true,
+                scrub: 1,
+                anticipatePin: 1,
             });
 
             // If not the last card, animate it (scale down, fade) as the next one comes up
@@ -63,15 +64,14 @@ const Projects = () => {
                 const nextPanel = panels[index + 1];
 
                 gsap.to(currentCard, {
-                    scale: 0.9,
-                    opacity: 0.4,
-                    filter: 'brightness(0.2) blur(2px)',
+                    scale: 0.92,
+                    opacity: 0.3,
                     ease: 'none',
                     scrollTrigger: {
                         trigger: nextPanel,
                         start: 'top 100%',
                         end: 'top 0%',
-                        scrub: true,
+                        scrub: 1, // Smooth scrubbing with 1 second delay
                         id: `project-effect-${index}`,
                     }
                 });
@@ -90,7 +90,7 @@ const Projects = () => {
         {
             title: 'Smart Village Mart',
             description: 'Developed a full-stack e-commerce platform connecting rural shopkeepers with customers to digitize local businesses.',
-            tech: ['React', 'Tailwind CSS','Javascript', 'Node JS','Express JS', 'MySQL', 'vite'],
+            tech: ['React', 'Tailwind CSS', 'Javascript', 'Node JS', 'Express JS', 'MySQL', 'vite'],
             link: 'https://github.com/SandipChavan2004/smart_village_mart.git',
             image: '/assets/svm.jpeg',
             gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
@@ -104,7 +104,7 @@ const Projects = () => {
             gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)'
         },
         {
-            
+
             title: 'TLUG- Club Website',
             description: ' Developed a comprehensive community website for the TKIET Linux User Group. The platform serves as the digital hub for members, events, announcements, member profiles, and photo galleries.',
             tech: ['HTML5', 'CSS3', 'JavaScript', 'Node Js', 'Express Js'],
